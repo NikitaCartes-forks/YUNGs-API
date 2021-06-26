@@ -2,6 +2,7 @@ package com.yungnickyoung.minecraft.yungsapi.world;
 
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.Direction;
+import com.yungnickyoung.minecraft.yungsapi.mixin.BlockBoxAccessor;
 
 public class BoundingBoxHelper {
     /**
@@ -14,20 +15,20 @@ public class BoundingBoxHelper {
         switch (mainAxis) {
             case NORTH:
             default:
-                blockBox.maxX = x + (secondaryAxisLen - 1);
-                blockBox.minZ = z - (mainAxisLen - 1);
+                ((BlockBoxAccessor) blockBox).setMaxX(x + (secondaryAxisLen - 1));
+                ((BlockBoxAccessor) blockBox).setMinZ(z - (mainAxisLen - 1));
                 break;
             case SOUTH:
-                blockBox.minX = x - (secondaryAxisLen - 1);
-                blockBox.maxZ = z + (mainAxisLen - 1);
+                ((BlockBoxAccessor) blockBox).setMinX(x - (secondaryAxisLen - 1));
+                ((BlockBoxAccessor) blockBox).setMaxZ(z + (mainAxisLen - 1));
                 break;
             case WEST:
-                blockBox.minX = x - (mainAxisLen - 1);
-                blockBox.minZ = z - (secondaryAxisLen - 1);
+                ((BlockBoxAccessor) blockBox).setMinX(x - (mainAxisLen - 1));
+                ((BlockBoxAccessor) blockBox).setMinZ(z - (secondaryAxisLen - 1));
                 break;
             case EAST:
-                blockBox.maxX = x + (mainAxisLen - 1);
-                blockBox.maxZ = z + (secondaryAxisLen - 1);
+                ((BlockBoxAccessor) blockBox).setMaxX(x + (mainAxisLen - 1));
+                ((BlockBoxAccessor) blockBox).setMaxZ(z + (secondaryAxisLen - 1));
         }
         return blockBox;
     }
